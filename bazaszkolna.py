@@ -3,7 +3,6 @@ import sys
 operacje = ("wychowawca", "nauczyciel", "uczen", "koniec")
 
 wychowawcy = []
-wychowawcy2 = {}
 nauczyciele = []
 uczniowie = []
 grupy = {}
@@ -29,6 +28,13 @@ class Grupa:
         self.nauczyciele = []
         self.uczniowie  = []
 
+def dodanie_grupy(numer):
+    if numer not in grupy:
+        grupa = Grupa(numer)
+        grupy[numer] = grupa  
+    return grupy[numer]           
+
+
 class Wychowawca:
     def __init__(self):
         self.imie = ""
@@ -36,14 +42,16 @@ class Wychowawca:
 
     def pobor_danych(self):
         self.imie = input()
+        wychowawcy.append(self.imie)
         klasy = []
         while True:
             klasa = input()
             if not klasa:
                 break    
             self.klasy.append(klasa)
-            
-    
+            #grupa = dodanie_grupy(self.klasa)
+            #grupa.wychowawca = self      
+
 
 class Nauczyciel:
     def __init__(self):
@@ -53,6 +61,7 @@ class Nauczyciel:
 
     def pobor_danych(self):
         self.imie = input()
+        nauczyciele.append(self.imie)
         self.przedmiot = input()
         klasy = []
         while True:
@@ -60,7 +69,8 @@ class Nauczyciel:
             if not klasa:
                 break    
             self.klasy.append(klasa)
-            print("klasy")
+            #grupa = dodanie_grupy(self.klasa)
+            #grupa.nauczyciele.append(self)
 
 
 class Uczen:
@@ -70,38 +80,42 @@ class Uczen:
 
     def pobor_danych(self):
         self.imie = input()
+        uczniowie.append(self.imie)
         self.klasa = input()    
-
+        grupa = dodanie_grupy(self.klasa)
+        grupa.uczniowie.append(self)
 
 while True:
     typ = input()
-
     if typ not in operacje:
         print("blad")
         continue
-
     if typ == "wychowawca":
         osoba = Wychowawca()
-        osoba.pobor_danych()
-        wychowawcy.append(osoba)
-
     if typ == "nauczyciel":
         osoba = Nauczyciel()
-        osoba.pobor_danych()
-        nauczyciele.append(osoba)
-
     if typ == "uczen":
-        osoba = Uczen()
-        osoba.pobor_danych()
-        uczniowie.append(osoba)
-      
+        osoba = Uczen()        
     if typ == "koniec":
         break 
-    
+    osoba.pobor_danych()
+
 
 if len(sys.argv) !=2:
     print("Nie podano prawidłowej funkcji programu")    
 else:
-    wydruk(sys.argv[1])
+    komenda = sys.argv[1]
+    if komenda in grupy:
+        #print(grupy[komenda])
+        print("klasa")
+    if komenda in wychowawcy:
+        print("wychow")
+    if komenda in nauczyciele: 
+        print("naucz")
+    if komenda in uczniowie:
+        print("uczen")
 
-   
+#print(dir(grupy))
+
+#print(grupy.__contains__)
+
