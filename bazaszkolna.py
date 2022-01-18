@@ -14,17 +14,6 @@ if len(sys.argv) !=2:
 else:
     phrase = sys.argv[1]
     
-def wydruk(komenda):
-    if komenda in grupy:
-        #print(grupy[komenda])
-        print("klasa")
-    if komenda in wychowawcy:
-        print("wychow")
-    if komenda in nauczyciele: 
-        print("naucz")
-    if komenda in uczniowie:
-        print("uczen")
-
 
 class Grupa:
     def __init__(self,numer):
@@ -39,13 +28,11 @@ class Grupa:
         for uczen in self.uczniowie:
             print(f"- {uczen.imie}")
 
-
 def dodanie_grupy(numer):
     if numer not in grupy:
         grupa = Grupa(numer)
         grupy[numer] = grupa  
     return grupy[numer]    
-
 
 
 class Wychowawca:
@@ -94,6 +81,7 @@ class Nauczyciel:
             else:
                 print(f"klasa {klasa} nie ma wychowawcy")
 
+
 class Uczen:
     def __init__(self):
         self.imie = ""
@@ -109,8 +97,6 @@ class Uczen:
         for nauczyciel in grupy[self.klasa].nauczyciele:
             print(f"\n ucznia {phrase} prowadzą:")
             print(f"- {nauczyciel.imie} - {nauczyciele[nauczyciel.imie].przedmiot}")
-
-
 
 while True:         #główna pętla
     typ = input()
@@ -137,7 +123,6 @@ while True:         #główna pętla
         baza[osoba.imie]=osoba
     baza[osoba.imie+"2"]=osoba"""
 
-
 if phrase in nauczyciele:
     nauczyciele[phrase].wydruk()
 if phrase in wychowawcy:
@@ -145,9 +130,4 @@ if phrase in wychowawcy:
 if phrase in uczniowie:
     uczniowie[phrase].wydruk()
 if phrase in grupy:
-    grupy[phrase].wydruk()
-
-#print(nauczyciele["Stanislaw Lem"].przedmiot)
-#print(grupy["1a"].nauczyciele)
-
-#print(uczniowie)      
+    grupy[phrase].wydruk()   
