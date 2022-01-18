@@ -52,7 +52,9 @@ class Wychowawca:
 
     def wydruk(self): 
         for klasa in self.klasy:
-            print(f"\n{self.imie} jest wychowawcą klasy {klasa},\nuczniowie:")
+            print(
+            f"\nNauczyciel {self.imie} jest wychowawcą klasy {klasa},\nuczniowie:"
+            )
             for uczen in grupy[klasa].uczniowie:
                 print(f"- {uczen.imie}")
 
@@ -94,8 +96,8 @@ class Uczen:
         grupa.uczniowie.append(self)
 
     def wydruk(self): 
+        print(f"\nUcznia {phrase} prowadzą:")
         for nauczyciel in grupy[self.klasa].nauczyciele:
-            print(f"\n ucznia {phrase} prowadzą:")
             print(f"- {nauczyciel.imie} - {nauczyciele[nauczyciel.imie].przedmiot}")
 
 while True:         #główna pętla
